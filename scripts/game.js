@@ -66,6 +66,7 @@ let state_current = 'init';
 
 function game_frame() {
 	state[state_current].frame();
+	input_get();
 }
 
 s_frame_callback = game_frame;
