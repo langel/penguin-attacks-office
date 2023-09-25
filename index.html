@@ -20,12 +20,19 @@
 		#screen {
 			image-rendering: pixelated;
 		}
+		#status_bar {
+			letter-spacing: .5rem;
+			padding-top: 10px;
+		}
 	</style>
 </head>
 <body>
 	<div id="cabinet">
 		<canvas id="screen"></canvas>
+		<div id="status_bar">LOADING</div>
 	</div>
 	<script src="scripts/screen.js"></script>
+	<script src="scripts/graphics.js"></script>
+	<script src="scripts/game.js"></script>
 </body>
 </html>
