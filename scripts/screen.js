@@ -1,6 +1,6 @@
 
 const s_ctx = document.getElementById('screen').getContext('2d');
-const s_width = 256;
+const s_width = 320;
 const s_height = 224;
 const s_rat = s_width / s_height;
 const s_fps = 48;
