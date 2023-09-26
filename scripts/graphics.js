@@ -1,21 +1,21 @@
 
-const bg_list = [
-	'officecity',
-	'officecityview',
-];
-const sprite_list = [
-	'enemies_hipu',
-	'enemies_hipushadow',
-	'enemies_kanirobody',
-	'enemies_kanirohands',
-	'enemies_kaniroshadow',
-	'objects_comanddesk',
-	'objects_pottedpalmtree',
-	'objects_pottedpalmtreeshadow',
+const graphics_list = [
+	'bg_doorway',
+	'bg_offices',
+	'bg_view',
+	'desk',
+	'door_debris',
+	'hipu',
+	'hipu_shadow',
+	'kaniro_body',
+	'kaniro_bullet',
+	'kaniro_hands',
+	'kaniro_shadow',
 	'player',
+	'player_bullet',
 	'player_shadow',
-	'projectiles_kaniro',
-	'projectiles_player',
+	'tree_palm',
+	'tree_palm_shadow',
 ];
 
 let gfx = {};
@@ -32,10 +32,7 @@ function graphics_load(key, file) {
 }
 
 function graphics_init() {
-	bg_list.forEach((key) => {
-		graphics_load(key, 'graphics/backgrounds_' + key + '.png');
-	});
-	sprite_list.forEach((key) => {
-		graphics_load(key, 'graphics/sprites_' + key + '.png');
+	graphics_list.forEach((key) => {
+		graphics_load(key, 'graphics/' + key + '.png');
 	});
 }
