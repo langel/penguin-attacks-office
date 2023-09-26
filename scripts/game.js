@@ -13,6 +13,8 @@ let bgy = 0;
 let bgw = 320;
 let bgh = 1344;
 
+let stuff = [];
+
 let state = {
 	'init' : {
 		'frame': function() {
@@ -21,6 +23,10 @@ let state = {
 				state_current = 'game';
 				console.log(graphics_loaded + ' graphics loaded');
 				document.getElementById('status_bar').innerHTML = 'Penguin Attacks Office';
+			}
+			for (let i = 0; i < 8; i++) {
+				stuff.push({x: 64, y: 64 + 52 * i, t: 'palm'});
+				stuff.push({x: 204, y: 64 + 56 * i, t: 'desk'});
 			}
 		},
 	},
@@ -36,6 +42,15 @@ let state = {
 			if (bgy > bgh) bgy -= bgh;
 			s_ctx.drawImage(gfx['officecity'], 0, bgy);
 			s_ctx.drawImage(gfx['officecity'], 0, bgy - bgh);
+			// objects
+			stuff.forEach((ent, i) => {
+				if (s_frame_count % 2 == 0) {
+					ent.y++;
+					if (ent.y > s_height) ent.y -= s_height * 2;
+				}
+				if (ent.t == 'palm') s_ctx.drawImage(gfx['objects_pottedpalmtree'], 0, 0, 32, 64, ent.x, ent.y, 32, 64);
+				if (ent.t == 'desk') s_ctx.drawImage(gfx['objects_comanddesk'], 0, 0, 48, 32, ent.x, ent.y, 48, 32);
+			});
 			// enemy
 			sy++;
 			if (sy > 200) {

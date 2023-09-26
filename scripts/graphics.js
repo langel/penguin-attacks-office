@@ -9,6 +9,7 @@ const sprite_list = [
 	'enemies_kanirobody',
 	'enemies_kanirohands',
 	'enemies_kaniroshadow',
+	'objects_comanddesk',
 	'objects_pottedpalmtree',
 	'objects_pottedpalmtreeshadow',
 	'player',
