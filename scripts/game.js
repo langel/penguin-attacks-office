@@ -8,6 +8,7 @@ function game_init() {
 	let dado = new_ent();
 	dado.x = 150;
 	stuff.dado = dado;
+	stuff.p_bullets = [];
 }
 
 function game_frame() {
@@ -63,8 +64,40 @@ function game_frame() {
 		0, 0, 56, 48, px+16, py+16, 56, 48);
 	s_ctx.drawImage(gfx['player'],
 		0, 0, 56, 48, px, py, 56, 48);
-	// bullets
+	// player bullets
 	if (s_frame_count % 3 == 0) {
+		let b = new_ent();
+		b.x = px;
+		b.y = py;
+		b.w = b.h = 8;
+		b.d = Math.floor(Math.random() * 8);
+		stuff.p_bullets.push(b);
+	}
+	for (let i = stuff.p_bullets.length - 1; i >= 0; i--) {
+		const b = stuff.p_bullets[i];
+		const bss = 3; // bullet speed straight
+		const bsd = 1.8; // bullet speed diagonal
+		if (b.d == 0) b.y -= bss;
+		if (b.d == 1) { b.y -= bsd; b.x += bsd; }
+		if (b.d == 2) b.x += bss;
+		if (b.d == 3) { b.x += bsd; b.y += bsd; }
+		if (b.d == 4) b.y += bss;
+		if (b.d == 5) { b.x -= bsd; b.y += bsd; }
+		if (b.d == 6) b.x -= bss;
+		if (b.d == 7) { b.x -= bsd; b.y -= bsd; }
+		b.f++;
+		if (s_inbounds(b.x, b.y, b.w, b.h) == false) {
+			stuff.p_bullets.splice(i, 1);
+		}
+		else {
+			let x = (b.d % 4) * 8;
+			let y = Math.floor(b.d / 4) * 8
+			s_ctx.drawImage(gfx['player_projectile'], x, y, 8, 8, b.x, b.y, 8, 8);
+		}
+	}
+
+	// bullets
+	if (s_frame_count % 33 == 0) {
 		pb.push({
 			x: Math.floor(Math.random() * 16) * 16 + 32,
 			y: s_height,

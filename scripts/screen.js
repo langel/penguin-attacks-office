@@ -17,6 +17,14 @@ window.addEventListener('load', () => {
 	s_frame();
 });
 
+function s_inbounds(x, y, w, h) {
+	if (x + w > 0 
+		&& x - w < s_width
+		&& y + h > 0
+		&& y - h < s_height) return true;
+	return false;
+}
+
 function s_resize() {
 	let ww = window.innerWidth;
 	let wh = window.innerHeight;

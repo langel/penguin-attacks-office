@@ -18,3 +18,4 @@ let stuff = {};
 let ent_obj = { x: 0, y: 0, w: 0, h: 0 };
 
 let new_ent = () => { return JSON.parse(JSON.stringify(ent_obj)); };
+let new_rect = (x, y, w, h) => { return {x:x,y:y,w:w,h:h}; };
