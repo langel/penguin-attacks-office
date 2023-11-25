@@ -9,6 +9,7 @@ function game_init() {
 	dado.x = 150;
 	stuff.dado = dado;
 	stuff.p_bullets = [];
+	player.new_game();
 }
 
 function game_frame() {
@@ -60,15 +61,13 @@ function game_frame() {
 			32, 0, 32, 32, sx, sy, 32, 32);
 	}
 	// player
-	s_ctx.drawImage(gfx['player_shadow'],
-		0, 0, 56, 48, px+16, py+16, 56, 48);
-	s_ctx.drawImage(gfx['player'],
-		0, 0, 56, 48, px, py, 56, 48);
+	player.update();
+	player.draw();
 	// player bullets
 	if (s_frame_count % 3 == 0) {
 		let b = new_ent();
-		b.x = px;
-		b.y = py;
+		b.x = player.x;
+		b.y = player.y;
 		b.w = b.h = 8;
 		b.d = Math.floor(Math.random() * 8);
 		stuff.p_bullets.push(b);

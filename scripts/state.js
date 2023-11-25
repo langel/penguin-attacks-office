@@ -1,11 +1,12 @@
 
+const instructions = 'WASD + Arrows: Controls | Tab: Swap Controls | Space: Start/Pause';
 
 const state_init = () => {
 	if (graphics_count == 0) graphics_init();
 	if (graphics_loaded == graphics_count) {
 		state_current = game_frame;
 		console.log(graphics_loaded + ' graphics loaded');
-		document.getElementById('status_bar').innerHTML = 'Penguin Attacks Office';
+		document.getElementById('status_bar').innerHTML = instructions;
 	}
 	game_init();
 }

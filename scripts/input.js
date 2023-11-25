@@ -1,14 +1,20 @@
 
 let input_key = {};
 let input_pad = {};
+let input = {};
+let inputs_pressed = new Array(128).fill(0);
 
+const KEY_SPACE = 32;
+const KEY_TAB = 9;
 
 window.addEventListener('keydown', (e) => {
-	input_key[e.key] = 1;
+	if (e.keyCode == KEY_TAB) e.preventDefault();
+	input_key[e.keyCode] = true;
+	console.log(e.keyCode);
 });
 
 window.addEventListener('keyup', (e) => {
-	input_key[e.key] = 0;
+	input_key[e.keyCode] = false;
 });
 
 
@@ -26,11 +32,15 @@ function input_pad_disconnect(e) {
 
 
 function input_get() {
-	let input = {
-		'up': 0,
-		'right': 0,
-		'down': 0,
-		'left': 0,
+	input = {
+		'mu': false,
+		'mr': false,
+		'md': false,
+		'ml': false,
+		'su': false,
+		'sr': false,
+		'sd': false,
+		'sl': false,
 	};
 	const gamepads = navigator.getGamepads();
 	const sb = document.getElementById('status_bar');
@@ -46,6 +56,7 @@ function input_get() {
 				v = gp.buttons[i].value;
 //				sb.innerHTML += i + ':' + v + ' ';
 			});
+			/*
 			if (gp.buttons[0].pressed) py--;
 			if (gp.buttons[2].pressed) py++;
 			if (gp.buttons[1].pressed) px--;
@@ -55,12 +66,36 @@ function input_get() {
 			if (gp.buttons[11].pressed) px--;
 			if (gp.buttons[13].pressed) px++;
 			if (gp.buttons[14].pressed) px--;
+			*/
 		}
 	}
 //	console.log(input_pad);
+	for (let i = 0; i < 128; i++) {
+		if (input_key[i]) inputs_pressed[i]++;
+		else inputs_pressed[i] = 0;
+	}
 
-	if (input_key['ArrowUp']) py-=2;
-	if (input_key['ArrowDown']) py+=2;
-	if (input_key['ArrowLeft']) px-=2;
-	if (input_key['ArrowRight']) px+=2;
+	if (inputs_pressed[KEY_TAB] == 1) {
+		inputs_swapped = !inputs_swapped;
+	}
+	if (!inputs_swapped) {
+		if (input_key[87]) input.mu = true;
+		if (input_key[68]) input.mr = true;
+		if (input_key[83]) input.md = true;
+		if (input_key[65]) input.ml = true;
+		if (input_key[38]) input.su = true;
+		if (input_key[39]) input.sr = true;
+		if (input_key[40]) input.sd = true;
+		if (input_key[37]) input.sl = true;
+	}
+	else {
+		if (input_key[87]) input.su = true;
+		if (input_key[68]) input.sr = true;
+		if (input_key[83]) input.sd = true;
+		if (input_key[65]) input.sl = true;
+		if (input_key[38]) input.mu = true;
+		if (input_key[39]) input.mr = true;
+		if (input_key[40]) input.md = true;
+		if (input_key[37]) input.ml = true;
+	}
 }
