@@ -10,7 +10,6 @@ const KEY_TAB = 9;
 window.addEventListener('keydown', (e) => {
 	if (e.keyCode == KEY_TAB) e.preventDefault();
 	input_key[e.keyCode] = true;
-	console.log(e.keyCode);
 });
 
 window.addEventListener('keyup', (e) => {

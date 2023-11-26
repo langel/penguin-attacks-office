@@ -13,6 +13,7 @@ function game_init() {
 }
 
 function game_frame() {
+	frames++;
 	// city view
 	if (s_frame_count % 3 == 0) bgvy++;
 	if (bgvy > bgvh) bgvy -= bgvh;
@@ -64,18 +65,10 @@ function game_frame() {
 	player.update();
 	player.draw();
 	// player bullets
-	if (s_frame_count % 3 == 0) {
-		let b = new_ent();
-		b.x = player.x;
-		b.y = player.y;
-		b.w = b.h = 8;
-		b.d = Math.floor(Math.random() * 8);
-		stuff.p_bullets.push(b);
-	}
 	for (let i = stuff.p_bullets.length - 1; i >= 0; i--) {
 		const b = stuff.p_bullets[i];
-		const bss = 3; // bullet speed straight
-		const bsd = 1.8; // bullet speed diagonal
+		const bss = 5; // bullet speed straight
+		const bsd = bss * 0.707; // bullet speed diagonal
 		if (b.d == 0) b.y -= bss;
 		if (b.d == 1) { b.y -= bsd; b.x += bsd; }
 		if (b.d == 2) b.x += bss;

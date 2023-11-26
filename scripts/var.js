@@ -11,6 +11,7 @@ let bgw = 320;
 let bgh = 1344;
 
 let stuff = {};
+let frames = 0;
 
 let show_origin_point = true;
 let inputs_swapped = false;
