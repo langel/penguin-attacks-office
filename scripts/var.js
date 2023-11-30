@@ -10,6 +10,9 @@ let bgy = 224;
 let bgw = 320;
 let bgh = 1344;
 
+let scroll_x = 0;
+let scroll_y = 0;
+
 let stuff = {};
 let frames = 0;
 

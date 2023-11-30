@@ -14,16 +14,15 @@ function game_init() {
 
 function game_frame() {
 	frames++;
+	scroll_y++;
 	// city view
-	if (s_frame_count % 3 == 0) bgvy++;
-	if (bgvy > bgvh) bgvy -= bgvh;
+	bgvy = Math.round(scroll_y / 3);
 	s_ctx.drawImage(gfx['bg_view'], 0, bgvy);
-	s_ctx.drawImage(gfx['bg_view'], 0, bgvy - bgvh);
+	s_ctx.drawImage(gfx['bg_view'], 0, (bgvy % bgvh) - bgvh);
 	// background
-	if (s_frame_count % 2 == 0) bgy++;
-	if (bgy > bgh) bgy -= bgh;
+	bgy = Math.round(scroll_y / 2);
 	s_ctx.drawImage(gfx['bg_offices'], 0, bgy);
-	s_ctx.drawImage(gfx['bg_offices'], 0, bgy - bgh);
+	s_ctx.drawImage(gfx['bg_offices'], 0, (bgy % bgh) - bgh);
 	// doorways
 	s_ctx.drawImage(gfx['bg_doorway'], 0, 0, 96, 64, 112, bgy - 320, 96, 64);
 	s_ctx.drawImage(gfx['bg_doorway'], 0, 0, 96, 64, 112, bgy - 576, 96, 64);
